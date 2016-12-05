@@ -1,1 +1,0 @@
-json.array! @categorizes, partial: 'categorizes/categorize', as: :categorize
