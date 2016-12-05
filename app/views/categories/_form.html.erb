@@ -1,17 +1,9 @@
-<%= form_for(category) do |f| %>
-  <% if category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+<%= simple_form_for @category, html: { multipart: true } do |f| %>
+  <%= f.error_notification %>
 
-      <ul>
-      <% category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= f.input :name %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="col-md-4 col-md-push-2 center-div">
+    <%= f.button :submit, ( f.object.new_record? ? "Crear" : "Actualizar"), {class: 'btn btn-primary btn-block'} %>
   </div>
 <% end %>
