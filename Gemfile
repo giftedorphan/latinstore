@@ -64,6 +64,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Assets
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-datepicker-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-font-awesome'
 end
