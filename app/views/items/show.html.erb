@@ -1,4 +1,53 @@
-<p id="notice"><%= notice %></p>
+  <div class="wrapper">
+  <div class="col-md-12">
+    <h1 class="first_title">
+      <b><%= @item.name %></b>
+    </h1>
+  </div>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+  <div class="col-md-12 space">
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <p class="label-tag"> Name: </p>
+      </div>
+      <div class="col-md-12">
+        <p class="data"> <%= @item.name %> </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <p class="label-tag"> Description: </p>
+      </div>
+      <div class="col-md-12">
+        <p class="data"> <%= @item.description %> </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 space">
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <p class="label-tag"> Price: </p>
+      </div>
+      <div class="col-md-12">
+        <p class="data"> <%= @item.price %> </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <p class="label-tag"> Stock: </p>
+      </div>
+      <div class="col-md-12">
+        <p class="data"> <%= @item.stock %> </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-md-push-2 center-div space">
+    <%= link_to 'Editar', edit_item_path(:id => @item.id), {class: 'btn btn-primary btn-block'} %>
+  </div>
+
+  <div class="col-md-4 col-md-push-2 center-div space">
+    <%= link_to 'Volver', items_path, {class: 'btn btn-primary btn-block'} %>
+  </div>
+</div>

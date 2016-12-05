@@ -1,5 +1,15 @@
-<h1>New Item</h1>
+<div class="wrapper">
+  <div class="col-md-12 space">
+    <h1 class="first_title">
+      New Item
+    </h1>
+  </div>
 
 <%= render 'form', item: @item %>
 
-<%= link_to 'Back', items_path %>
+  <div class="col-md-4 col-md-push-2 center-div space">
+    <%= link_to 'Volver', items_path, {class: 'btn btn-primary btn-block'} %>
+  </div>
+
+  <div class="col-md-12 space"></div>
+</div>
