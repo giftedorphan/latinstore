@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20161113213321) do
     t.string   "name",                      null: false
     t.string   "price",                     null: false
     t.string   "stock",       default: "0", null: false
-    t.text     "description"
+    t.text     "description",               null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
