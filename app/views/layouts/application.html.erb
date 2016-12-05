@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Latin Stores" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Latin store description" %>">
+    <meta charset="UTF-8">
+    <meta name="application-name" content="Latin Store">
+    <title>Latin Store</title>
+    <meta name="description" content="Create your own online shop, Sell/Buy online from home">
+    <meta name="keywords" content="Shop,Home,Stores,Items,Sell,Buy,Online">
+    <meta name="author" content="Ernesto Alamilla">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
