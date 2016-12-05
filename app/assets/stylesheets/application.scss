@@ -1,0 +1,14 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+@import "jquery-ui/core";
+@import "jquery-ui/datepicker";
+@import "jquery-ui/theme";
+
+@import "conf--fonts.scss";
+
+@import "global.scss";
+@import "conf--sidebar.scss";
+@import "conf--navbar.scss";
+@import "conf--content.scss"

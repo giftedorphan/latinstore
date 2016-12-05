@@ -1,0 +1,1 @@
+json.partial! "categorizes/categorize", categorize: @categorize
