@@ -25,7 +25,7 @@ class ItemsController < BaseController
     @item = Item.new(item_params)
 
     if @item.save
-      flash[:success] = "Item was successfully created."
+      flash[:notice] = "Item was successfully created."
     else
       flash[:error] = 'There was a problem processing your request.'
     end
@@ -35,7 +35,7 @@ class ItemsController < BaseController
 
   def update
     if @item.update_attributes item_params
-      flash[:success] = "Item was successfully updated."
+      flash[:notice] = "Item was successfully updated."
     else
       flash[:error] = 'There was a problem processing your request.'
     end
@@ -45,7 +45,7 @@ class ItemsController < BaseController
 
   def destroy
     if @item.destroy
-      flash[:success] = "Item was successfully deleted."
+      flash[:notice] = "Item was successfully deleted."
     else
       flash[:error] = 'There was a problem processing your request.'
     end
@@ -59,6 +59,6 @@ class ItemsController < BaseController
     end
 
     def item_params
-      params.fetch(:item, {})
+      params.fetch(:item, {}).permit(:name, :price, :stock, :description)
     end
 end
