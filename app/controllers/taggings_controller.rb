@@ -6,7 +6,7 @@ class TaggingsController < BaseController
     @tagging = Tagging.new tagging_params
 
     if @tagging.valid? and @tagging.save
-      flash[:success] = "Tag was successfully added"
+      flash[:notice] = "Tag was successfully added"
     else
       flash[:error] = "There was a problem with your request"
     end
@@ -18,7 +18,7 @@ class TaggingsController < BaseController
     @tagging = Tagging.find params[:id]
 
     if @tagging.destroy
-      flash[:success] = "Tag was successfully removed"
+      flash[:notice] = "Tag was successfully removed"
     else
       flash[:error] = "There was a problem with your request"
     end

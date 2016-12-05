@@ -35,7 +35,7 @@ class TagsController < BaseController
 
   def update
     if @tag.update_attributes tag_params
-      flash[:success] = 'Tag was successfully updated.'
+      flash[:notice] = 'Tag was successfully updated.'
     else
       flash[:error] = 'There was a problem processing your request.'
     end
@@ -45,7 +45,7 @@ class TagsController < BaseController
 
   def destroy
     if @tag.destroy
-      flash[:success] = "Tag was successfully deleted."
+      flash[:notice] = "Tag was successfully deleted."
     else
       flash[:error] = 'There was a problem processing your request.'
     end

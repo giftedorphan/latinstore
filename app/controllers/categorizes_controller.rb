@@ -6,7 +6,7 @@ class CategorizesController < BaseController
     @categorize = Categorize.new categorize_params
 
     if @categorize.valid? and @categorize.save
-      flash[:success] = "Category was successfully added"
+      flash[:notice] = "Category was successfully added"
     else
       flash[:error] = "There was a problem with your request"
     end
@@ -18,7 +18,7 @@ class CategorizesController < BaseController
     @categorize = Tagging.find params[:id]
 
     if @categorize.destroy
-      flash[:success] = "Category was successfully removed"
+      flash[:notice] = "Category was successfully removed"
     else
       flash[:error] = "There was a problem with your request"
     end

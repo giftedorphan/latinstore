@@ -34,8 +34,8 @@ class CategoriesController < BaseController
   end
 
   def update
-    if @category.update_atributes category_params
-      flash[:success] = 'Category was successfully updated.'
+    if @category.update_attributes category_params
+      flash[:notice] = 'Category was successfully updated.'
     else
       flash[:error] = "There was a problem processing your request"
     end
@@ -45,7 +45,7 @@ class CategoriesController < BaseController
 
   def destroy
     if @category.destroy
-      flash[:success] = "Category was successfully deleted."
+      flash[:notice] = "Category was successfully deleted."
     else
       flash[:error] = 'There was a problem processing your request.'
     end
@@ -59,6 +59,6 @@ class CategoriesController < BaseController
     end
 
     def category_params
-      params.fetch(:category, {})
+      params.fetch(:category, {}).permit(:name)
     end
 end
