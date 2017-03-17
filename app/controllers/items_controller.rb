@@ -4,8 +4,9 @@ class ItemsController < BaseController
   respond_to :html, :json
 
   def index
-    @items = Item.all
-    respond_with @item
+    @items = Item.all.order("created_at DESC").paginate(
+                                      :page => params[:page], :per_page => 9)
+    respond_with @items
   end
 
   def show
@@ -25,9 +26,9 @@ class ItemsController < BaseController
     @item = Item.new(item_params)
 
     if @item.save
-      flash[:notice] = "Item was successfully created."
+      flash[:success] = 'Item was successfully created.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'There was a problem processing your request.'
     end
 
     respond_with @item
@@ -35,9 +36,9 @@ class ItemsController < BaseController
 
   def update
     if @item.update_attributes item_params
-      flash[:notice] = "Item was successfully updated."
+      flash[:success] = 'Item was successfully updated.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'There was a problem processing your request.'
     end
 
     respond_with @item
@@ -45,9 +46,9 @@ class ItemsController < BaseController
 
   def destroy
     if @item.destroy
-      flash[:notice] = "Item was successfully deleted."
+      flash[:success] = 'Item was successfully deleted.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'There was a problem processing your request.'
     end
 
     respond_with @item
@@ -55,7 +56,7 @@ class ItemsController < BaseController
 
   private
     def set_item
-      @item = Item.find(params[:id])
+      @item = Item.find(params[:item_id])
     end
 
     def item_params
