@@ -3,8 +3,16 @@
     <h1 class="first_title"><b>Categories</b></h1>
   </div>
 
+  <div class="col-md-6 col-md-push-2">
+    <%= form_tag('/categories', method: 'post') do %>
+      <%= label_tag('category[name]', 'Category name: ') %>
+      <%= text_field_tag('category[name]', '', class: 'nameCategoryTag') %>
+      <%= submit_tag('Add', class: 'sendButton') %>
+    <% end %>
+  </div>
+
   <div class="col-md-12">
-    <div class="col-md-12 col-md-push-1">
+    <div class="col-md-10 col-md-push-1">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -13,10 +21,12 @@
         </thead>
         <tbody>
           <% @categories.each do |category| %>
-            <tr data-link="<%= edit_category_path(:id => category.id) %>" class="data-row">
-              <td class="col-md-1"> <%= category.name %> </td>
-              <td class="col-md-2">
-                <%= link_to 'Eliminar categoria', category_path(id: category.id), :method => 'delete', data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-danger btn-block' %>
+            <tr>
+              <td class="col-md-6">
+                <a href="#" data-type="text" data-resource="category" data-name="name" data-url="<%= category_path(category_id: category.id) %>" data-original-title="Enter category name" class='EditNameCategoryTag'><%= category.name %></a>
+              </td>
+              <td class="col-md-6">
+                <%= link_to 'Eliminar categoria', category_path(category_id: category.id), :method => 'delete', data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-danger btn-block' %>
               </td>
             </tr>
           <% end %>
@@ -24,9 +34,9 @@
       </table>
     </div>
   </div>
-
-  <div class="col-md-4 col-md-push-2 center-div space">
-    <%= link_to 'Agregar categoria', new_category_path, {class: 'btn btn-primary btn-block'} %>
+</div>
+  <div class="col-md-12 center-div">
+    <%= will_paginate @categories, :next_label => 'Siguiente', :previous_label => 'Anterior', renderer: BootstrapPagination::Rails %>
   </div>
 
   <div class="col-md-4 col-md-push-2 center-div space">

@@ -3,9 +3,17 @@
     <h1 class="first_title"><b>tags</b></h1>
   </div>
 
+  <div class="col-md-6 col-md-push-2">
+    <%= form_tag('/tags', method: 'post') do %>
+      <%= label_tag('tag[name]', 'Tag name: ') %>
+      <%= text_field_tag('tag[name]', '', class: 'nameCategoryTag') %>
+      <%= submit_tag('Add', class: 'sendButton') %>
+    <% end %>
+  </div>
+
   <div class="col-md-12">
-    <div class="col-md-12 col-md-push-1">
-      <table class="table table-hover">
+    <div class="col-md-10 col-md-push-1">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Name</th>
@@ -13,9 +21,13 @@
         </thead>
         <tbody>
           <% @tags.each do |tag| %>
-            <tr data-link="<%= edit_tag_path(:id => tag.id) %>" class="data-row">
-              <td class="col-md-1"> <%= tag.name %> </td>
-              <td> <%= link_to 'Eliminar', tag_path(tag), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm' %> </td>
+            <tr>
+              <td class="col-md-6">
+                <a href="#" data-type="text" data-resource="tag" data-name="name" data-url="<%= tag_path(tag_id: tag.id) %>" data-original-title="Enter tag name" class='EditNameCategoryTag'><%= tag.name %></a>
+              </td>
+              <td class="col-md-6">
+                <%= link_to 'Eliminar', tag_path(tag), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm btn-block' %>
+              </td>
             </tr>
           <% end %>
         </tbody>
@@ -23,10 +35,14 @@
     </div>
   </div>
 
-  <div class="col-md-4 col-md-push-2 center-div space">
-    <%= link_to 'Agregar tag', new_tag_path, {class: 'btn btn-primary btn-block'} %>
+  <div class="col-md-12">
+    <div class="col-md-7 col-md-push-5">
+      <%= will_paginate @tags, :next_label => 'Siguiente', :previous_label => 'Anterior', renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
 
   <div class="col-md-4 col-md-push-2 center-div space">
     <%= link_to 'Volver', root_path, {class: 'btn btn-primary btn-block'} %>
   </div>
+
+</div>

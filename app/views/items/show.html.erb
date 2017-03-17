@@ -11,7 +11,7 @@
         <p class="label-tag"> Name: </p>
       </div>
       <div class="col-md-12">
-        <p class="data"> <%= @item.name %> </p>
+        <p data-type="Item" id="item_name" data-id="<%= @item.id %>" class="data"> <%= @item.name %> </p>
       </div>
     </div>
     <div class="col-md-6">
@@ -43,8 +43,50 @@
     </div>
   </div>
 
-  <div class="col-md-4 col-md-push-2 center-div space">
-    <%= link_to 'Editar', edit_item_path(:id => @item.id), {class: 'btn btn-primary btn-block'} %>
+  <div class="col-md-12">
+    <h1 class="first_title">
+      <b> Tags </b>
+    </h1>
+  </div>
+
+  <div id="tagsortablelists" class="col-md-12 space">
+    <div class="col-md-6 space">
+      <ul class="picklistbox picklist sortabletag">
+        <% for tag in (Tag.all - @item.tags)%>
+          <li data-type="Tag" data-id="<%= tag.id %>" class="clickable"> <%= tag.name %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-6 space">
+      <ul class="picklistbox picklist sortabletag item_categories_tags">
+        <% for tag in @item.tags %>
+          <li data-type="Tag" data-id="<%= tag.id %>" class="clickable"> <%= tag.name %> </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <h1 class="first_title">
+      <b> Categories </b>
+    </h1>
+  </div>
+
+  <div id="categorysortablelists" class="col-md-12 space">
+    <div class="col-md-6 space">
+      <ul class="picklistbox picklist sortablecategory">
+        <% for category in (Category.all - @item.categories)%>
+          <li data-type="Category" data-id="<%= category.id %>" class="clickable"> <%= category.name %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-6 space">
+      <ul class="picklistbox picklist sortablecategory item_categories_tags">
+        <% for category in @item.categories %>
+          <li data-type="Category" data-id="<%= category.id %>" class="clickable"> <%= category.name %> </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 
   <div class="col-md-4 col-md-push-2 center-div space">

@@ -16,13 +16,16 @@
         </thead>
         <tbody>
           <% @items.each do |item| %>
-            <tr data-link="<%= edit_item_path(:id => item.id) %>" class="data-row">
+            <tr data-link="<%= item_path(:item_id => item.id) %>" class="data-row clickable">
               <td class="col-md-1"> <%= item.name %> </td>
               <td class="col-md-1"> <%= item.description %> </td>
               <td class="col-md-1"> <%= item.stock %> </td>
               <td class="col-md-1"> <%= item.price %> </td>
               <td class="col-md-2">
-                <%= link_to 'Eliminar item', item_path(id: item.id), :method => 'delete', data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-danger btn-block' %>
+                <%= link_to 'Editar', edit_item_path(item_id: item.id), :class => 'btn btn-warning btn-block' %>
+              </td>
+              <td class="col-md-2">
+                <%= link_to 'Eliminar', item_path(item_id: item.id), :method => 'delete', data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-danger btn-block' %>
               </td>
             </tr>
           <% end %>
@@ -30,9 +33,14 @@
       </table>
     </div>
   </div>
+</div>
+
+<div class="col-md-12 center-div">
+    <%= will_paginate @items, :next_label => 'Siguiente', :previous_label => 'Anterior', renderer: BootstrapPagination::Rails %>
+  </div>
 
   <div class="col-md-4 col-md-push-2 center-div space">
-    <%= link_to 'Agregar item', new_item_path, {class: 'btn btn-primary btn-block'} %>
+    <%= link_to 'Agregar item', new_item_path, {class: 'btn btn-success btn-block'} %>
   </div>
 
   <div class="col-md-4 col-md-push-2 center-div space">
