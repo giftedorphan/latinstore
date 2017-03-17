@@ -26,10 +26,13 @@ gem 'will_paginate-bootstrap'
 gem 'simple_form'
 #User authentication
 gem 'devise'
+#Edit in place
+gem 'bootstrap-editable-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'js-routes'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
