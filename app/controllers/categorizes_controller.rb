@@ -1,4 +1,5 @@
 class CategorizesController < BaseController
+  before_action :set_categorize, only: :destroy
 
   respond_to :html, :json
 
@@ -6,21 +7,19 @@ class CategorizesController < BaseController
     @categorize = Categorize.new categorize_params
 
     if @categorize.valid? and @categorize.save
-      flash[:notice] = "Category was successfully added"
+      flash[:success] = 'Category was successfully linked.'
     else
-      flash[:error] = "There was a problem with your request"
+      flash[:danger] = 'There was a problem with your request.'
     end
 
     respond_with @categorize, location: nil
   end
 
   def destroy
-    @categorize = Tagging.find params[:id]
-
     if @categorize.destroy
-      flash[:notice] = "Category was successfully removed"
+      flash[:success] = 'Category was successfully unlinked'
     else
-      flash[:error] = "There was a problem with your request"
+      flash[:danger] = 'There was a problem with your request.'
     end
 
     respond_with @categorize, location: nil
@@ -28,7 +27,7 @@ class CategorizesController < BaseController
 
   private
     def set_categorize
-      @categorize = Categorize.find(params[:id])
+      @categorize = current_item.categorizes.where(category_id: params[:categorize][:category_id]).first
     end
 
     def categorize_params
