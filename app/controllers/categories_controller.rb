@@ -4,50 +4,40 @@ class CategoriesController < BaseController
   respond_to :html, :json
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order('created_at DESC').paginate(
+                                      :page => params[:page], :per_page => 9)
     respond_with @categories
   end
 
-  def show
-    respond_with @category
-  end
-
-  def new
-    @category = Category.new
-    respond_with @category
-  end
-
-  def edit
-    respond_with @category
-  end
-
   def create
-    @category = Category.new(category_params)
+    @category = Category.where(:name => category_params[:name].downcase).first_or_initialize
 
-    if @category.save
-      flash[:notice] = 'Category was successfully created.'
+    if @category.new_record?
+      @category.save
+      flash[:success] = 'Category was successfully created.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'Category already exist.'
     end
 
-    respond_with @category
+    respond_with @category, location: categories_path
   end
 
   def update
     if @category.update_attributes category_params
-      flash[:notice] = 'Category was successfully updated.'
+      flash[:success] = 'Category was successfully updated.'
+      respond_with(@category, :location => categories_path, )
     else
-      flash[:error] = "There was a problem processing your request"
+      respond_to do |format|
+        format.json { render json: @category.errors, status: 422 }
+      end
     end
-
-    respond_with @category
   end
 
   def destroy
     if @category.destroy
-      flash[:notice] = "Category was successfully deleted."
+      flash[:success] = 'Category was successfully deleted.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'There was a problem processing your request.'
     end
 
     respond_with @category
@@ -55,7 +45,7 @@ class CategoriesController < BaseController
 
   private
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.find(params[:category_id])
     end
 
     def category_params
