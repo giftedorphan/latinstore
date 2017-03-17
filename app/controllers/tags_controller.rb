@@ -4,50 +4,40 @@ class TagsController < BaseController
   respond_to :html, :json
 
   def index
-    @tags = Tag.all
+    @tags = Tag.all.order('created_at DESC').paginate(
+                            :page => params[:page], :per_page => 9)
     respond_with @tags
   end
 
-  def show
-    respond_with @tag
-  end
-
-  def new
-    @tag = Tag.new
-    respond_with @tag
-  end
-
-  def edit
-    respond_with @tag
-  end
-
   def create
-    @tag = Tag.new(tag_params)
+    @tag = Tag.where(:name => tag_params[:name].downcase).first_or_initialize
 
-    if @tag.save
-      flash[:notice] = 'Tag was successfully created.'
+    if @tag.new_record?
+      @tag.save
+      flash[:success] = 'Tag was successfully created.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'Tag already exist.'
     end
 
-    respond_with @tag
+    respond_with @tag, location: tags_path
   end
 
   def update
     if @tag.update_attributes tag_params
-      flash[:notice] = 'Tag was successfully updated.'
+      flash[:success] = 'Tag was successfully updated.'
+      respond_with(@tag, :location => tags_path, )
     else
-      flash[:error] = 'There was a problem processing your request.'
+      respond_to do |format|
+        format.json { render json: @tag.errors, status: 422 }
+      end
     end
-
-    respond_with @tag
   end
 
   def destroy
     if @tag.destroy
-      flash[:notice] = "Tag was successfully deleted."
+      flash[:success] = 'Tag was successfully deleted.'
     else
-      flash[:error] = 'There was a problem processing your request.'
+      flash[:danger] = 'There was a problem processing your request.'
     end
 
     respond_with @tag
@@ -55,7 +45,7 @@ class TagsController < BaseController
 
   private
     def set_tag
-      @tag = Tag.find(params[:id])
+      @tag = Tag.find(params[:tag_id])
     end
 
     def tag_params
