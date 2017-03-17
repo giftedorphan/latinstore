@@ -16,5 +16,20 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require table_tr_click
+//= require picklist
+//= require toggle_category_tag_submit
+//= editable_response
+//= show_ajax_message
+//= require js-routes
 //= require_tree .
+
+var ready;
+ready = function() {
+  $(".alert").delay(5000).slideUp('slow');
+};
+
+$(document).on('turbolinks:load', ready);
+$(document).ajaxComplete(ready);
